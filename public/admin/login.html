@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — A Charkha Story</title>
+  <link rel="stylesheet" href="/admin/css/admin.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧵</text></svg>">
+</head>
+<body>
+  <div class="admin-login-page">
+    <div class="login-card">
+      <div class="login-card-header">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="16" stroke="#C2703E" stroke-width="2"/>
+            <circle cx="20" cy="20" r="8" stroke="#C2703E" stroke-width="1.5"/>
+            <circle cx="20" cy="20" r="2" fill="#C2703E"/>
+            <line x1="20" y1="4" x2="20" y2="12" stroke="#C2703E" stroke-width="1.5"/>
+            <line x1="20" y1="28" x2="20" y2="36" stroke="#C2703E" stroke-width="1.5"/>
+            <line x1="4" y1="20" x2="12" y2="20" stroke="#C2703E" stroke-width="1.5"/>
+            <line x1="28" y1="20" x2="36" y2="20" stroke="#C2703E" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h2>Admin Portal</h2>
+        <p>A Charkha Story — Dashboard</p>
+      </div>
+
+      <div class="login-error" id="login-error"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="admin@charkha.in" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="login-btn">Sign In</button>
+      </form>
+
+      <div style="text-align:center; margin-top:24px;">
+        <a href="/" style="font-size:0.8125rem; color:var(--color-brown-light);">← Back to Store</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/admin/js/admin-api.js"></script>
+  <script>
+    // If already logged in as admin, redirect
+    (async () => {
+      try {
+        const data = await AdminAPI.getMe();
+        if (data.user && data.user.role === 'admin') {
+          window.location.href = '/admin';
+        }
+      } catch {}
+    })();
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('login-btn');
+      const errEl = document.getElementById('login-error');
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+      errEl.classList.remove('show');
+
+      try {
+        const data = await AdminAPI.login(email, password);
+        // Verify admin role
+        const me = await AdminAPI.getMe();
+        if (me.user && me.user.role === 'admin') {
+          window.location.href = '/admin';
+        } else {
+          errEl.textContent = 'Access denied. Admin credentials required.';
+          errEl.classList.add('show');
+          // Logout the non-admin session
+          await AdminAPI.logout();
+        }
+      } catch (err) {
+        errEl.textContent = err.message || 'Login failed';
+        errEl.classList.add('show');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
+      }
+    });
+  </script>
+</body>
+</html>

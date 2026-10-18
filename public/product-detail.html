@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — A Charkha Story</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧵</text></svg>">
+</head>
+<body>
+  <header class="header"><div class="header-inner">
+    <a href="/" class="logo"><div class="logo-icon"><svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" stroke="#C2703E" stroke-width="2"/><circle cx="20" cy="20" r="8" stroke="#C2703E" stroke-width="1.5"/><circle cx="20" cy="20" r="2" fill="#C2703E"/><line x1="20" y1="4" x2="20" y2="12" stroke="#C2703E" stroke-width="1.5"/><line x1="20" y1="28" x2="20" y2="36" stroke="#C2703E" stroke-width="1.5"/><line x1="4" y1="20" x2="12" y2="20" stroke="#C2703E" stroke-width="1.5"/><line x1="28" y1="20" x2="36" y2="20" stroke="#C2703E" stroke-width="1.5"/></svg></div>
+    <div class="logo-text">A Charkha <span>Story</span></div></a>
+    <nav class="nav">
+      <ul class="nav-links"><li><a href="/">Home</a></li><li><a href="/products">Shop</a></li><li><a href="/products?category=Sarees">Sarees</a></li><li><a href="/products?category=Kurtis">Kurtis</a></li><li><a href="/orders">Orders</a></li></ul>
+      <div class="nav-actions">
+        <a href="/cart" class="nav-icon-btn" title="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-badge" id="cart-badge">0</span></a>
+        <a href="/login" class="nav-icon-btn" id="auth-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+        <div class="menu-toggle" id="menu-toggle"><span></span><span></span><span></span></div>
+      </div>
+    </nav>
+  </div></header>
+
+  <section class="product-detail">
+    <div class="container" id="product-container">
+      <div class="loading-overlay"><div class="spinner"></div><p>Loading product...</p></div>
+    </div>
+  </section>
+
+  <!-- Related Products -->
+  <section class="section-sm" style="background:var(--color-white)">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">You Might Also Like</span>
+        <h2>Related Products</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="product-grid" id="related-products"></div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container"><div class="footer-bottom">
+    <span>© 2024 A Charkha Story. Handcrafted with ❤️ in India.</span>
+    <span>Celebrating Swadeshi & Sustainable Fashion</span>
+  </div></div></footer>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/product-detail.js"></script>
+</body>
+</html>

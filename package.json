@@ -1,0 +1,17 @@
+{
+  "name": "a-charkha-story",
+  "version": "1.0.0",
+  "description": "A Charkha Story — Premium Handcrafted Clothing Store",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "express-session": "^1.18.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "sql.js": "^1.11.0"
+  }
+}
